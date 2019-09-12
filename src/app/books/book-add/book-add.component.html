@@ -1,0 +1,26 @@
+<div *ngIf="message"> {{ message }} </div>
+
+<form #bookForm="ngForm" (ngSubmit)="addBook(bookForm)">
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>
+        <input type="text" name="title" ngModel />
+      </td>
+      <td>
+        <input type="text" name="author" ngModel />
+      </td>
+      <td>
+        <input type="text" name="description" ngModel />
+      </td>
+    </tr>
+    <tr>
+      <button>Add</button>
+    </tr>
+  </table>
+
+</form>
