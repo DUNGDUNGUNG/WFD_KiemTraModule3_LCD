@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import {IBook} from '../book';
 import {BookService} from '../book.service';
 import {Router} from '@angular/router';
@@ -11,7 +11,6 @@ import {Router} from '@angular/router';
 export class BookListComponent implements OnInit {
 
   books: IBook[];
-  @Output() bookClick = new EventEmitter();
   message: string;
 
   constructor(private bookService: BookService,
@@ -33,13 +32,8 @@ export class BookListComponent implements OnInit {
     });
   }
 
-  selectBook(id: number) {
-    this.bookClick.emit(this.detailBook(id));
-
-  }
-
   detailBook(id: number) {
-    this.router.navigate(['/detail', id]);
+    this.router.navigate(['books/detail', id]);
   }
 
   deleteBook(id: number) {

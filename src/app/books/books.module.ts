@@ -7,11 +7,13 @@ import { BookAddComponent } from './book-add/book-add.component';
 import { BookDetailComponent } from './book-detail/book-detail.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
-import { BookInfoComponent } from './book-info/book-info.component';
 
 
 @NgModule({
-  declarations: [BookListComponent, BookAddComponent, BookDetailComponent, BookInfoComponent],
+  declarations: [BookListComponent, BookAddComponent, BookDetailComponent],
+  exports: [
+    BookDetailComponent
+  ],
   imports: [
     CommonModule,
     BooksRoutingModule,
