@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IBook} from '../book';
 import {BookService} from '../book.service';
+import {ActivatedRoute, ParamMap} from '@angular/router';
 
 @Component({
   selector: 'app-book-detail',
@@ -9,28 +10,21 @@ import {BookService} from '../book.service';
 })
 export class BookDetailComponent implements OnInit {
 
-  @Input() book: IBook;
+  book: IBook;
   message: string;
 
-  constructor(private bookService: BookService) {
+  constructor(private bookService: BookService,
+              private routes: ActivatedRoute) {
   }
 
   ngOnInit() {
-  }
-
-  editBook(bookForm) {
-    const id = bookForm.value.id;
-    const {title, author, description} = bookForm.value;
-    const book = {
-      title,
-      author,
-      description
-    };
-    this.bookService.edit(id, book).subscribe(() => {
-      this.message = 'Successfully updated';
-    }, error => {
-      this.message = 'Failed when updating book';
+    this.routes.paramMap.subscribe((param: ParamMap) => {
+      const id = parseInt(param.get('id'), 10);
+      this.bookService.getDetail(id).subscribe(next => {
+        this.book = next;
+      }, error => {
+        this.message = 'error update' + error;
+      });
     });
   }
-
 }

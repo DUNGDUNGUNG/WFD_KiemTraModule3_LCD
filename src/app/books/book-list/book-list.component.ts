@@ -36,6 +36,10 @@ export class BookListComponent implements OnInit {
     this.router.navigate(['books/detail', id]);
   }
 
+  editBook(id: number) {
+    this.router.navigate(['books/edit', id]);
+  }
+
   deleteBook(id: number) {
     this.bookService.delete(id).subscribe(() => {
       this.message = 'Successfully deleted';
